@@ -9,6 +9,8 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+const port = process.env.PORT || 3000;
+
 app.get('/blog', (req, res, next) => {
     //console.log(req.query);
     res.json({
@@ -37,10 +39,15 @@ app.get('/blog', (req, res, next) => {
     });
 });
 
+app.post('/registration', (req, res, next) => {
+    console.log(req.body);
+    res.status(201).json({message: 'success'});
+});
+
 app.use('/', (req, res, next) => {
     res.send('index.html');
 });
 
-app.listen(3000, () => {
-    console.log('server running');
+app.listen(port, () => {
+    console.log(`server running on port ${port}`);
 });
